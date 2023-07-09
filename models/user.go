@@ -25,16 +25,18 @@ var users = []User{
 	},
 	{
 		ID:"2",
-		Fname:"Habiba",
-		Lname: "Mujahid",
-		Age: "23",
+		Fname:"Muhammad",
+		Lname: "Awwal",
+		Age: "43",
 	},
 }
 
+// fetch all users
 func GetUsers() []User {
 	return users
 }
 
+// fetch single user
 func GetUser(id string) User {
 	for _,user := range users {
 		if user.ID == id {
@@ -44,6 +46,7 @@ func GetUser(id string) User {
 	return User{}
 }
 
+// add new user
 func AddUser(user BodyData) User {
 	// generate a random id
 	id := strconv.Itoa(rand.Intn(1000))
@@ -52,6 +55,7 @@ func AddUser(user BodyData) User {
 	return User{ ID: id, Fname: user.Fname, Lname: user.Lname, Age: user.Age}
 }
 
+// remove user
 func RemoveUser(id string) string {
 	for index,user := range users {
 		if user.ID == id {
