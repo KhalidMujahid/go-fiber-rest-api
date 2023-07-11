@@ -2,11 +2,21 @@ const fname = document.querySelector("#fname");
 const lname = document.querySelector("#lname");
 const age = document.querySelector("#age");
 const button = document.querySelector("button");
+const users = document.querySelector(".users");
 
 async function getData() {
   await fetch("/users")
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      data.forEach((d) => {
+        users.innerHTML += `
+        <div class="user">
+          <h5>Name: ${d.fname} ${d.lname}</h5>
+          <p>Age: ${d.age}</p>
+        </div>
+      `;
+      });
+    })
     .catch((error) => console.error(error));
 }
 
@@ -29,7 +39,10 @@ async function sendToBackEnd(value) {
     body: JSON.stringify(value),
   })
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then(() => {
+      alert("Data sent successfully...");
+      window.location.reload();
+    })
     .catch((error) => console.error(error));
 
   fname.value = "";
